@@ -99,7 +99,7 @@ export const EditReception: React.FC = () => {
     <AppLayout
       title={`Редактирование приемки ${reception.reception_number}`}
       breadcrumbs={[
-        { label: 'Архив', path: '/app/archive' },
+        { label: 'Архив Приемок', path: '/app/archive' },
         {
           label: `Приемка ${reception.reception_number}`,
           path: `/app/archive/${reception.id}`,
