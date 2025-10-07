@@ -13,7 +13,8 @@ export const AcceptanceMode: React.FC = () => {
 
   // Placeholder for Acceptance Mode (Step 5)
   return (
-    <AppLayout title="Приемка (Заказы на ремонт)">
+    <AppLayout title="Создать приемку
+      ">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold text-gray-800">
           Текущие заказы на ремонт
