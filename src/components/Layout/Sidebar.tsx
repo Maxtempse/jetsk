@@ -52,7 +52,7 @@ export const Sidebar: React.FC = () => {
     {
       to: '/app/archive',
       icon: <Archive className="w-5 h-5" />,
-      label: 'Архив',
+      label: 'Архив Приемок',
     },
   ]
 
