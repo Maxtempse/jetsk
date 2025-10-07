@@ -232,7 +232,7 @@ import React, { useState } from 'react'
         <AppLayout
           title="Новая Приемка"
           breadcrumbs={[
-            { label: 'Приемка (Заказы)', path: '/app/acceptance' },
+            { label: 'Создать приемку', path: '/app/acceptance' },
             { label: 'Новый Заказ', path: '/app/acceptance/new' },
           ]}
         >
