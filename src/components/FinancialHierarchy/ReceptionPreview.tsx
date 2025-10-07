@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
     import { ReceptionExcelRow } from '../../utils/parseReceptionExcel'
-    import { ChevronDown, ChevronRight, CreditCard as Edit2, Copy, Trash2, Plus, X, Bookmark } from 'lucide-react'
+    import { ChevronDown, ChevronRight, CreditCard as Edit2, Copy, Trash2, Plus, X, Bookmark, Search } from 'lucide-react'
+    import { CounterpartySelectionModal } from '../Acceptance/CounterpartySelectionModal'
+    import { Counterparty } from '../../services/counterpartyService'
 
     interface ReceptionPreviewProps {
       data: ReceptionExcelRow[]
@@ -11,6 +13,7 @@ import React, { useState } from 'react'
       onAddItemToGroup?: (positionNumber: number, workGroup: string) => void
       onSaveAsTemplate?: (positionNumber: number) => void
       onReceptionNumberUpdate?: (newReceptionNumber: string) => void
+      onCounterpartyUpdate?: (counterpartyName: string) => void
     }
 
     interface PositionItemProps {
@@ -664,9 +667,10 @@ import React, { useState } from 'react'
       )
     }
 
-    export const ReceptionPreview: React.FC<ReceptionPreviewProps> = ({ data, onDataChange, onAddGroupClick, onDuplicatePosition, onDeletePosition, onAddItemToGroup, onSaveAsTemplate, onReceptionNumberUpdate }) => {
+    export const ReceptionPreview: React.FC<ReceptionPreviewProps> = ({ data, onDataChange, onAddGroupClick, onDuplicatePosition, onDeletePosition, onAddItemToGroup, onSaveAsTemplate, onReceptionNumberUpdate, onCounterpartyUpdate }) => {
       const [isEditingReceptionNumber, setIsEditingReceptionNumber] = useState(false)
       const [editReceptionNumber, setEditReceptionNumber] = useState('')
+      const [isCounterpartyModalOpen, setIsCounterpartyModalOpen] = useState(false)
       if (data.length === 0) {
         return (
           <div className="text-center py-12 text-gray-500">
@@ -815,7 +819,18 @@ import React, { useState } from 'react'
               </div>
               <div>
                 <span className="text-gray-500">Контрагент:</span>
-                <p className="font-medium">{firstRow.counterpartyName}</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <p className="font-medium">{firstRow.counterpartyName}</p>
+                  {onCounterpartyUpdate && (
+                    <button
+                      onClick={() => setIsCounterpartyModalOpen(true)}
+                      className="text-gray-400 hover:text-blue-600 transition"
+                      title="Выбрать контрагента"
+                    >
+                      <Search size={14} />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -842,6 +857,17 @@ import React, { useState } from 'react'
               />
             ))}
           </div>
+
+          <CounterpartySelectionModal
+            isOpen={isCounterpartyModalOpen}
+            onClose={() => setIsCounterpartyModalOpen(false)}
+            onSelect={(counterparty: Counterparty) => {
+              if (onCounterpartyUpdate) {
+                onCounterpartyUpdate(counterparty.name)
+              }
+              setIsCounterpartyModalOpen(false)
+            }}
+          />
         </div>
       )
     }

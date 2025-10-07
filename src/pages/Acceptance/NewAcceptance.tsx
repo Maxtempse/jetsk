@@ -162,6 +162,15 @@ import React, { useState } from 'react'
         setSuccessMessage(`Номер приемки изменен на "${newReceptionNumber}"`)
       }
 
+      const handleCounterpartyUpdate = (newCounterpartyName: string) => {
+        const newData = receptionData.map(item => ({
+          ...item,
+          counterpartyName: newCounterpartyName
+        }))
+        setReceptionData(newData)
+        setSuccessMessage(`Контрагент изменен на "${newCounterpartyName}"`)
+      }
+
       // --- Template Handlers ---
 
       const handleOpenSaveTemplateModal = (positionNumber: number) => {
@@ -265,6 +274,7 @@ import React, { useState } from 'react'
                   onAddItemToGroup={receptionData.length > 0 ? handleAddItemToGroup : undefined}
                   onSaveAsTemplate={receptionData.length > 0 ? handleOpenSaveTemplateModal : undefined}
                   onReceptionNumberUpdate={receptionData.length > 0 ? handleReceptionNumberUpdate : undefined}
+                  onCounterpartyUpdate={receptionData.length > 0 ? handleCounterpartyUpdate : undefined}
                 />
               )}
             </div>
