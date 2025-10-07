@@ -42,7 +42,7 @@ export const Sidebar: React.FC = () => {
     {
       to: '/app/acceptance',
       icon: <ListChecks className="w-5 h-5" />,
-      label: 'Приемка (Заказы)',
+      label: 'Создать приемку',
     },
     {
       to: '/app/upd-assembly',
